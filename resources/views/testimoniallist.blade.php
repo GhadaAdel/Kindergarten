@@ -1,3 +1,4 @@
+@extends('layouts.admin')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +12,9 @@
 <body>
 
 <div class="container">
-  <h2>Testimonial List</h2>
+  @section('content')
+
+  <h2 class="display-2 mb-4">Testimonial List</h2>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -37,6 +40,7 @@
     </tbody>    
   </table>
 </div>
+@endsection
 
 </body>
 </html>

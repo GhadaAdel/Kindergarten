@@ -13,7 +13,7 @@
 
 @include('includes.classes')
 
-@include('includes.appointments')
+@include('includes.appointment')
 
 @include('includes.team')
 

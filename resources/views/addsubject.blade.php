@@ -1,3 +1,4 @@
+@extends('layouts.admin')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +12,7 @@
 <body>
 
 <div class="container">
+  @section('content')
   <h2>Add Subject</h2>
   <form action="{{route('displaysubject')}}" method="POST" enctype="multipart/form-data">
     @csrf
@@ -82,8 +84,9 @@
        <div class="alert alert-warning">{{ $message }}</div>          
       @enderror
     </div>
-    <button type="submit" class="btn btn-default">Add</button>
+    <button type="submit" class="btn btn-primary rounded-pill px-3 d-none d-lg-block">Add New Subject</button>
   </form>
 </div>
+@endsection
 </body>
 </html> 

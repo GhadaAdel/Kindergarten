@@ -6,12 +6,9 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Teacher;
-use App\Models\Student;
+use App\Models\Appointment;
 use App\Models\Subject;
 use App\Models\Client;
-
-
-
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,12 +19,9 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(10)->create();
         Teacher::factory(10)->create();
-        Student::factory(10)->create();
+        Appointment::factory(10)->create();
         Subject::factory(10)->create();
         Client::factory(10)->create();
-
-
-
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

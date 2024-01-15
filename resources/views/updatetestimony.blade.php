@@ -1,3 +1,4 @@
+@extends('layouts.admin')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +12,7 @@
 <body>
 
 <div class="container">
+  @section('content')
   <h2>Uppdate Testimonial</h2>
   <form action="{{ route('updateTestimonial',$testimony->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
@@ -47,5 +49,8 @@
     <button type="submit" class="btn btn-default">Update</button>
   </form>
 </div>
+
+@endsection
+
 </body>
 </html> 

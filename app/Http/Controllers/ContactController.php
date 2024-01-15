@@ -10,6 +10,22 @@ class ContactController extends Controller
     public function contact(){
         return view('contact');
     }
+
+    // public function contact(Request $request)
+    // {
+    //     $data = $request->validate([
+    //         'name' => 'required|string',
+    //         'mail' => 'required|email',
+    //         'subject' => 'required|string',
+    //         'message' => 'required|string|max:400'
+    //     ]);
+
+    //     Contact::create($data);
+
+    //     Mail::to('spareaccnt77@gmail.com')->send(new Contactmail($data));
+
+    //     return redirect()->back()->with('success', 'Email sent successfully!');
+    // }
     public function sendEmail(Request $request) {
         $details = [
             'name' => $request->name,

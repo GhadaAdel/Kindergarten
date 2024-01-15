@@ -17,8 +17,10 @@ class KidController extends Controller
     public function index()
     {
         $testimony = Client::get();
-        $sub = Subject::get();
-        return view('kider', compact('testimony','sub'));
+        $sub = Subject::latest()->take(6)->get();
+        $teacher = Teacher::latest()->take(3)->get();
+
+        return view('kider', compact('testimony', 'sub', 'teacher'));
         //return view('kider');
     }
 
@@ -47,7 +49,18 @@ class KidController extends Controller
     {
         return view('contact');
     }
+    
+    public function sendEmail(Request $request) {
+        $details = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'subject' => $request->subject,
+            'msg' => $request->msg,
+        ];
+        Mail::to('ghada@gmail.com')->send(new ContactMail($details));
+        return back()->with('message_sent', 'Ur message has been sent succesfullyyyy');
 
+    }
     public function testimonial()
     {
         $testimony = Client::get();
@@ -62,8 +75,8 @@ class KidController extends Controller
 
     public function team()
     {
-        return view('team');
-    }
+        $teacher = Teacher::latest()->take(3)->get();
+        return view('team', compact('teacher'));    }
 
     public function action()
     {

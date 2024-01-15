@@ -20,7 +20,7 @@ return new class extends Migration
             $table->time('end_time');
             $table->string('price');
             $table->string('capacity');
-            $table->foreignId('teacher_id')->constrained('teachers');
+            $table->foreignId('teacher_id')->constrained('teachers')->onDelete('cascade');
             $table->string('image');
             $table->softDeletes();
             $table->timestamps();

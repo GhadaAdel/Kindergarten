@@ -16,7 +16,8 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        //
+        $subject = Subject::get();
+        return view('subjectList', compact('subject'));
     }
 
     /**
@@ -60,8 +61,17 @@ class SubjectController extends Controller
 
     //custom error messages
     public function messages(){
-        return ['name.required' => 'Name is required',
-        'testimony.required' => 'Testimony is required'
+        return [
+        'class_subject.required' => 'class_subject name is required',
+        'class_subject.string' => 'class_subject name must be string',
+        'min_age.required' => 'min_age is required',
+        'max_age.required' => 'max_age is required',
+        'start_time.required' => 'start_time is required',
+        'end_time.required' => 'end_time is required',
+        'price.required' => 'price is required',
+        'capacity.required' => 'capacity is required',
+        'image.required' => 'Image is required',
+        'image.mimes' => 'Image must be png, jpg, jpeg, webp'
       ];
     }
 
@@ -79,7 +89,8 @@ class SubjectController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $sub = Subject::findOrFail($id);
+        return view('updateSubject', compact('sub'));
     }
 
     /**
@@ -87,14 +98,55 @@ class SubjectController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $messages = $this->messages();
+
+        //form data validation
+        $data = $request->validate([
+            'class_subject' => 'required|string',
+            'min_age' => 'required|decimal:0,2',
+            'max_age' => 'required|decimal:0,2',
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'price' => 'required|decimal:0,2',
+            'capacity' => 'required|decimal:0,2',
+            'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
+        ], $messages);
+
+        //update image
+        if($request->hasFile('image')){
+            $filename = $this->uploadfile($request->image, 'assets/images');
+            $data['image'] = $filename;
+        }
+        
+
+        Subject::where('id', $id)->update($data);
+        return redirect('admin/subjectList');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): RedirectResponse
     {
-        //
+        Subject::where('id', $id)->delete();
+        return redirect('admin/subjectList');
+    }
+
+    public function trashed()
+    {
+        $subject = Subject::onlyTrashed()->get();
+        return view('trashedSubject', compact('subject'));
+    }
+
+    public function restore(string $id): RedirectResponse
+    {
+        Subject::where('id', $id)->restore();
+        return redirect('admin/subjectList');
+    }
+
+    public function fdSubject(string $id): RedirectResponse
+    {
+        Subject::where('id', $id)->forceDelete();
+        return redirect('admin/trashedSubject');
     }
 }

@@ -46,7 +46,7 @@
                                     <div class="row g-3">
                                         <div class="col-sm-6">
                                             <div class="form-floating">
-                                                <input type="text" class="form-control border-0" id="name" name="name" placeholder="Your Name">
+                                                <input type="text" class="form-control border-0" id="name" name="name" placeholder="{{ __('messages.contactForm')}}">
                                                 <label for="name">Your Name</label>
                                             </div>
                                         </div>

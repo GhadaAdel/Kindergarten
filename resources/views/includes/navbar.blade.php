@@ -17,13 +17,35 @@
                     <a href="{{ route('facilities') }}" class="dropdown-item">School Facilities</a>
                     <a href="{{ route('team') }}" class="dropdown-item">Popular Teachers</a>
                     <a href="{{ route('action') }}" class="dropdown-item">Become A Teachers</a>
-                    <a href="{{ route('appointments') }}" class="dropdown-item">Make Appointment</a>
+                    <a href="{{ route('appointment') }}" class="dropdown-item">Make Appointment</a>
                     <a href="{{ route('testimonial') }}" class="dropdown-item">Testimonial</a>
                 </div>
             </div>
             <a href="{{ route('contact') }}" class="nav-item nav-link {{ request()->routeIs('contact') ? 'active' : '' }}">Contact Us</a>
         </div>
-        <a href="" class="btn btn-primary rounded-pill px-3 d-none d-lg-block">Join Us<i class="fa fa-arrow-right ms-3"></i></a>
-    </div>
+        @if (Route::has('login'))
+        @auth
+            <a href="{{route('subjects')}}" class="btn btn-primary rounded-pill px-3 d-none d-lg-block">
+                {{ Auth::user()->name }}
+            </a>
+        @else
+            <a href="{{ route('login') }}" class="btn btn-primary rounded-pill px-3 d-none d-lg-block">
+                Join Us<i class="fa fa-arrow-right ms-3"></i>
+            </a>
+        @endauth
+        @endif 
+       </div>
 </nav>
 <!-- Navbar End -->
+<script>
+    anchors = Array.from(document.getElementsByClassName("nav-item nav-link"))
+
+    anchors.forEach(function (anchor) {
+        if (anchor.href === window.location.href) {
+            anchor.className = "nav-item nav-link active"
+        } else {
+            anchor.className = "nav-item nav-link"
+        }
+    })
+
+</script>
