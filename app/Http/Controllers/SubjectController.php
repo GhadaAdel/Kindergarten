@@ -76,15 +76,6 @@ class SubjectController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-   /* public function show(string $id)
-    {
-        $sub = Subject::latest()->take(6)->get();
-        return view('classes', compact('sub'));
-    } */
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)

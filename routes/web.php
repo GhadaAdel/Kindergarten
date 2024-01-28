@@ -40,7 +40,6 @@ Route::get('appointments',[KidController::class, 'appointment'])->name('appointm
 
 Route::fallback([KidController::class, 'error404']);
 
-Auth::routes(['verify'=>true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

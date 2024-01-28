@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\Subject;
 use App\Models\Teacher;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\contactMail;
 
 
 class KidController extends Controller
@@ -21,7 +22,6 @@ class KidController extends Controller
         $teacher = Teacher::latest()->take(3)->get();
 
         return view('kider', compact('testimony', 'sub', 'teacher'));
-        //return view('kider');
     }
 
     /**
@@ -42,7 +42,6 @@ class KidController extends Controller
     {
         $sub = Subject::latest()->take(6)->get();
         return view('classes', compact('sub'));
-        //return view('classes');
     }
 
     public function contact()
@@ -65,7 +64,6 @@ class KidController extends Controller
     {
         $testimony = Client::get();
         return view('testimonial', compact('testimony'));
-        //return view('testimonial');
     }
 
     public function facilities()
@@ -93,44 +91,4 @@ class KidController extends Controller
         return view('404page');
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
